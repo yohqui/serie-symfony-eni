@@ -1,13 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=yes, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>Test 123 ! test</h1>
-</body>
-</html>
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Test 123 ! test</h1>
+    <div>
+
+        {# les filtres de dates ! #}
+        <div>{{ "now"|date('Y') }}</div>
+        <div>{{ "+1 year"|date('Y') }} </div>
+
+        {# créer un variable ! #}
+        {% set name="Guillaume" %}
+        <h2>{{ name | upper}}</h2> <!-- affiche le nom en Majuscule -->
+
+        {# créer un tableau ! #}
+        {% set colors = ["orange", "red", "blue", "green", "yellow"] %}
+
+        <div>nombre de couleurs : {{ colors | length }}</div> <!-- affiche le nombre de couleurs -->
+        <div>{{ colors | join('/')}}</div> <!--permet d'afficher toutes les couleurs séparées de "/" -->
+
+        {% for color in colors %}
+            <div>{{ loop.index }}</div> <!-- affiche le numéro d'itération -->
+            <div>{{ loop.last }}</div> <!-- vérifie si on est au dernier passage dans la boucle on verifie que last que est vrai affichera 1-->
+            <div> style="background-color: {{ color }}">{{ color }}</div>
+        {% endfor %}
+
+        {# créer un Object !// miserables#}
+        {% set book = {
+            title: "Miserables"
+            year: 1862,
+            author : "Victor Hugo"}
+        }
+        %}
+        <h3>{{ book.author }}</h3>
+        <div>
+            {% for key, val in book %}
+                <div>{{ key }} : {{ val }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock body%}
+
+{%  block title %}{{ parent() }}| Test{% endblock title %}

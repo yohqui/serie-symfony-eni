@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class MainController extends AbstractController
 {
     /**
@@ -14,6 +15,15 @@ class MainController extends AbstractController
     public function home()
     {
       return $this->render('main/home.html.twig');
+    }
+
+    /**
+     * @Route ("/delimit", name="main_delimit")
+     */
+
+    public function delimit()
+    {
+        return $this->render('main/delimit.html.twig');
     }
 
     /**
