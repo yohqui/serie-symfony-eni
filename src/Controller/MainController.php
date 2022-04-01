@@ -18,21 +18,19 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route ("/delimit", name="main_delimit")
-     */
-
-    public function delimit()
-    {
-        return $this->render('main/delimit.html.twig');
-    }
-
-    /**
      * @Route ("/test", name="main_test")
      */
 
     public function test()
     {
-        return $this->render('main/test.html.twig');
+        $serie = [
+            "title" => "Gamme of Trones",
+            "year" => 2010,
+        ];
+        return $this->render('main/test.html.twig', [
+            "mySerie" =>$serie,
+            "autreVar" => 412412
+        ]);
     }
 
 }
