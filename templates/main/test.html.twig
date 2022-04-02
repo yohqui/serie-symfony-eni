@@ -18,20 +18,19 @@
         {% set colors = ["orange", "red", "blue", "green", "yellow"] %}
 
         <div>nombre de couleurs : {{ colors | length }}</div> <!-- affiche le nombre de couleurs -->
-        <div>{{ colors | join('/')}}</div> <!--permet d'afficher toutes les couleurs séparées de "/" -->
+        <div>couleurs : {{ colors | join(' / ')}}</div> <!--permet d'afficher toutes les couleurs séparées de "/" -->
 
         {% for color in colors %}
             <div>{{ loop.index }}</div> <!-- affiche le numéro d'itération -->
             <div>{{ loop.last }}</div> <!-- vérifie si on est au dernier passage dans la boucle on verifie que last que est vrai affichera 1-->
-            <div> style="background-color: {{ color }}">{{ color }}</div>
+            <div style="background-color: {{color}} ">{{color}}</div>
         {% endfor %}
 
         {# créer un Object !// miserables#}
         {% set book = {
-            title: "Miserables"
+            title: "Miserables",
             year: 1862,
             author : "Victor Hugo"}
-        }
         %}
         <h3>{{ book.author }}</h3>
         <div>
