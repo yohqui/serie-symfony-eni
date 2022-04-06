@@ -6,6 +6,7 @@ use App\Entity\Serie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -45,32 +46,40 @@ class SerieRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Serie[] Returns an array of Serie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findBestSeries()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        /*
+        //en DQL
+            $entityManager = $this->getEntityManager();
+            $dql = "
+                SELECT s
+                FROM App\Entity\Serie s
+                WHERE s.popularity > 100
+                AND s.vote > 8
+                ORDER BY s.popularity DESC ";
+            $query = $entityManager ->createQuery($dql);
+            $query -> setMaxResults(50);
+            $results = $query->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?Serie
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            return $results;
+        */
+
+        // version QueryBuilder
+        $queryBuilder = $this->createQueryBuilder('s');
+
+        $queryBuilder->leftJoin('s.seasons', 'seas')->addSelect('seas');
+
+        $queryBuilder-> andWhere('s.popularity > 100');
+        $queryBuilder-> andWhere('s.vote > 8');
+        $queryBuilder-> addOrderBy('s.popularity', 'DESC');
+        $query = $queryBuilder->getQuery();
+        $query -> setMaxResults(50);
+        //$results = $query->getResult();
+
+        $paginator = new Paginator($query);
+        //return $results;
+        return $paginator;
+
     }
-    */
+
 }
