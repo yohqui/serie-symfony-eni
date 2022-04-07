@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>voici la page home !</h1>
+    <div class="body-home">
+    <h1>Bienvenue sur votre site de séries préférées !</h1>
+    <img src="{{ asset('img/seriesA.jpg') }}">
+    </div>
 {% endblock body%}
 
 {%  block title %}{{ parent() }}| Home{% endblock title %}

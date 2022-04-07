@@ -2,7 +2,7 @@ body {
     background: linear-gradient(#000000, #132135);
     background-attachment: fixed;
     color: #EEE;
-    font-family: 'Crimson Text', serif;
+    font-family: 'Crimson Pro', serif;
 }
 
 .container {
@@ -42,7 +42,7 @@ nav ul {
     display: flex;
     list-style: none;
     padding-left: 0;
-}
+  }
 
 nav li {
     margin-right: 1rem;
@@ -104,4 +104,9 @@ select {
 .seasons article img {
     max-height: 200px;
     margin-right: 0.6rem;
+}
+
+.body-home {
+    color: orange;
+
 }
